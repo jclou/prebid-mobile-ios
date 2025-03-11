@@ -199,19 +199,19 @@ public class AdUnit: NSObject, DispatcherDelegate {
                 
                 return
             }
-            
-            let impressionTrackingPayload = PrebidImpressionTrackerPayload(
-                cacheID: bidResponse.winningBid?.targetingInfo?["hb_cache_id"],
-                trackingURLs: bidResponse.winningBid?.impressionTrackingURLs ?? []
-            )
-            
-            self.impressionTracker.register(payload: impressionTrackingPayload)
-            
-            if (!self.timeOutSignalSent) {
-                let resultCode = self.setUp(adObject, with: bidResponse)
-                let bidInfo = BidInfo.create(resultCode: resultCode, bidResponse: bidResponse)
-                completion(bidInfo)
-            }
+//            
+//            let impressionTrackingPayload = PrebidImpressionTrackerPayload(
+//                cacheID: bidResponse.winningBid?.targetingInfo?["hb_cache_id"],
+//                trackingURLs: bidResponse.winningBid?.impressionTrackingURLs ?? []
+//            )
+//            
+//            self.impressionTracker.register(payload: impressionTrackingPayload)
+//            
+//            if (!self.timeOutSignalSent) {
+//                let resultCode = self.setUp(adObject, with: bidResponse)
+//                let bidInfo = BidInfo.create(resultCode: resultCode, bidResponse: bidResponse)
+//                completion(bidInfo)
+//            }
         }
         
         let timeout = Int(truncating: Prebid.shared.timeoutMillisDynamic ?? NSNumber(value: .PB_Request_Timeout))

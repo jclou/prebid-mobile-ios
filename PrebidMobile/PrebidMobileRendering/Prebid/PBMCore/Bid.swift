@@ -59,12 +59,12 @@ public class Bid: NSObject {
     }
     
     /// Targeting information that needs to be passed to the ad server SDK.
-    public var targetingInfo: [String : String]? {
+    public var targetingInfo: [String : Any]? {
         bid.ext.prebid?.targeting
     }
     
     /// Targeting information that needs to be passed to the ad server SDK.
-    public var meta: [String : String]? {
+    public var meta: [String : Any]? {
         bid.ext.prebid?.meta
     }
     
@@ -88,12 +88,12 @@ public class Bid: NSObject {
     
     /// Preffered plugin renderer name
     public var pluginRendererName: String? {
-        meta?[Bid.KEY_RENDERER_NAME]
+        meta?[key: Bid.KEY_RENDERER_NAME]
     }
     
     /// Preffered plugin renderer version
     public var pluginRendererVersion: String? {
-        meta?[Bid.KEY_RENDERER_VERSION]
+        meta?[key: Bid.KEY_RENDERER_VERSION]
     }
     
     // This part is dedicating to test server-side ad configurations.

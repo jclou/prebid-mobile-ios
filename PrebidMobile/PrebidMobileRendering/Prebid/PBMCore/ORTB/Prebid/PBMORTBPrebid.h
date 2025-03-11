@@ -24,9 +24,5 @@
 
 // MARK: response.seatbid[?].bid[?].ext
 #import "PBMORTBBidExt.h"
-#import "PBMORTBBidExtPrebid.h"
-#import "PBMORTBExtPrebidPassthrough.h"
-#import "PBMORTBBidExtPrebidCache.h"
-#import "PBMORTBBidExtPrebidCacheBids.h"
 #import "PBMORTBBidExtSkadn.h"
 
