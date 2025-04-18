@@ -14,16 +14,17 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "PBMBidRequesterProtocol.h"
 
 @class AdUnitConfig;
+@class BidResponse;
 @class Prebid;
 @class Targeting;
 @protocol PrebidServerConnectionProtocol;
+@protocol __PBMInternal_PBMBidRequesterProtocol;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PBMBidRequester : NSObject <PBMBidRequesterProtocol>
+@interface PBMBidRequester : NSObject <__PBMInternal_PBMBidRequesterProtocol>
 
 - (instancetype)initWithConnection:(id<PrebidServerConnectionProtocol>)connection
                   sdkConfiguration:(Prebid *)sdkConfiguration

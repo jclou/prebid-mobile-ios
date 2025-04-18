@@ -21,12 +21,13 @@
 
 @class BidResponse;
 @protocol AdLoadFlowControllerDelegate;
+@protocol __PBMInternal_PBMBidRequesterProtocol;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PBMAdLoadFlowController () <PBMAdLoaderFlowDelegate>
 
-@property (nonatomic, copy, nonnull, readonly) id<PBMBidRequesterProtocol> (^bidRequesterFactory)(AdUnitConfig *);
+@property (nonatomic, copy, nonnull, readonly) id<__PBMInternal_PBMBidRequesterProtocol> (^bidRequesterFactory)(AdUnitConfig *);
 @property (nonatomic, strong, nonnull, readonly) id<PBMAdLoaderProtocol> adLoader;
 @property (nonatomic, weak, nullable, readonly) id<AdLoadFlowControllerDelegate> delegate;
 @property (nonatomic, copy, nonnull, readonly) PBMAdUnitConfigValidationBlock configValidationBlock;

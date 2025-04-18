@@ -35,7 +35,7 @@
 // MARK: - Lifecycle
 
 
-- (instancetype)initWithBidRequesterFactory:(id<PBMBidRequesterProtocol> (^)(AdUnitConfig *))bidRequesterFactory
+- (instancetype)initWithBidRequesterFactory:(id<__PBMInternal_PBMBidRequesterProtocol> (^)(AdUnitConfig *))bidRequesterFactory
                                    adLoader:(id<PBMAdLoaderProtocol>)adLoader
                                adUnitConfig:(AdUnitConfig *)adUnitConfig
                                    delegate:(id<AdLoadFlowControllerDelegate>)delegate
