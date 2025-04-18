@@ -15,7 +15,6 @@
 
 #import "PBMAdLoadFlowController.h"
 
-#import "PBMBidRequester.h"
 #import "PBMAdLoadFlowState.h"
 #import "PBMAdLoaderFlowDelegate.h"
 
@@ -36,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, nullable) AdUnitConfig *savedAdUnitConfig;
 
 // State: BidRequest
-@property (nonatomic, strong, nullable) PBMBidRequester *bidRequester;
+@property (nonatomic, strong, nullable) id<__PBMInternal_PBMBidRequesterProtocol> bidRequester;
 @property (nonatomic, strong, nullable) NSError *bidRequestError;
 
 // State: PrimaryAdRequest
