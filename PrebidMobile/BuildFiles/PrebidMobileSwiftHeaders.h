@@ -32,6 +32,4 @@
 
 #import "PBMInterstitialAdLoaderDelegate.h"
 
-#import "PBMInterstitialDisplayProperties.h"
-
 #import "PBMCreativeViewabilityTracker.h"
