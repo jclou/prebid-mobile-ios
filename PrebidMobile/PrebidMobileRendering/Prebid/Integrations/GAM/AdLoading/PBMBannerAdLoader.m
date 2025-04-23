@@ -13,8 +13,6 @@
  limitations under the License.
  */
 
-#import "PBMBannerAdLoader.h"
-
 #import <UIKit/UIKit.h>
 
 #import "PBMDisplayView.h"
@@ -30,13 +28,13 @@
 #import <PrebidMobile/PrebidMobile-Swift.h>
 #endif
 
-@interface PBMBannerAdLoader () <DisplayViewLoadingDelegate, BannerEventLoadingDelegate>
+@interface PBMBannerAdLoader_Objc: NSObject <PBMBannerAdLoader, DisplayViewLoadingDelegate, BannerEventLoadingDelegate>
 
 @property (nonatomic, weak, nullable, readonly) id<BannerAdLoaderDelegate, DisplayViewInteractionDelegate> delegate;
 
 @end
 
-@implementation PBMBannerAdLoader
+@implementation PBMBannerAdLoader_Objc
 
 @synthesize flowDelegate = _flowDelegate;
 

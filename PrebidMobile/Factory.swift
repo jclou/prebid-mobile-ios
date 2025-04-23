@@ -161,5 +161,15 @@ class Factory: NSObject {
                                       delegate: delegate,
                                       configValidationBlock: configValidationBlock)
     }
+    
+    // MARK: PBMBannerAdLoader
+    
+    @objc public static let PBMBannerAdLoaderType: PBMBannerAdLoader.Type = {
+        NSClassFromString("PBMBannerAdLoader_Objc") as! PBMBannerAdLoader.Type
+    }()
+    
+    @objc public static func PBMBannerAdLoader(delegate: BannerAdLoaderDelegate) -> PBMBannerAdLoader {
+        PBMBannerAdLoaderType.init(delegate: delegate)
+    }
 }
 
