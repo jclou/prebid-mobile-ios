@@ -142,10 +142,7 @@ framework module PrebidMobile {
     header "NSDictionary+PBMExtensions.h"
     header "NSMutableDictionary+PBMExtensions.h"
     header "PBMLocationManager.h"
-    
-    header "PBMInterstitialAdLoader.h"
-    header "PBMInterstitialAdLoaderDelegate.h"
-    
+        
     header "PrebidMobileDisplayViewProtocol.h"
     
     header "OMSDKVersionProvider.h"
