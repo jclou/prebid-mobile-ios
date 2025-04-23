@@ -53,7 +53,7 @@ class Factory: NSObject {
     }()
     
     @objc public static func createAdViewManager(connection: PrebidServerConnectionProtocol,
-                                                 modalManagerDelegate: PBMModalManagerDelegate?) -> AdViewManager {
+                                                 modalManagerDelegate: ModalManagerDelegate?) -> AdViewManager {
         AdViewManagerType.init(connection: connection, modalManagerDelegate: modalManagerDelegate)
     }
     
@@ -106,5 +106,30 @@ class Factory: NSObject {
                             nextOnStateHasLeftApp: nextOnStateHasLeftApp,
                             onModalPushedBlock: onModalPushedBlock)
     }
+    
+    // MARK: ModalViewController
+    
+    @objc public static let ModalViewControllerType: ModalViewController.Type = {
+        NSClassFromString("PBMModalViewController_Objc") as! ModalViewController.Type
+    }()
+    
+    @objc public static func createModalViewController(type: ModalViewController.Type) -> ModalViewController {
+        type.init()
+    }
+    
+    @objc public static func createModalViewController() -> ModalViewController {
+        createModalViewController(type: ModalViewControllerType)
+    }
+    
+    // MARK: NonModalViewController
+    
+    @objc public static let NonModalViewControllerType: NonModalViewController.Type = {
+        NSClassFromString("PBMNonModalViewController_Objc") as! NonModalViewController.Type
+    }()
+    
+    @objc public static func createNonModalViewController(frameOfPresentedView: CGRect) -> NonModalViewController {
+        NonModalViewControllerType.init(frameOfPresentedView: frameOfPresentedView)
+    }
+    
 }
 
