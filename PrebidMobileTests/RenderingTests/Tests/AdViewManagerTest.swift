@@ -321,12 +321,12 @@ class AdViewManagerTest: XCTestCase, PBMAdViewManagerDelegate {
         return UIViewController()
     }
     
-    func displayView() -> UIView {
+    var displayView: UIView {
         fulfillOrFail(displayViewExpectation, "displayViewExpectation")
-        return UIView();
+        return UIView()
     }
     
-    func interstitialDisplayProperties() -> InterstitialDisplayProperties {
+    var interstitialDisplayProperties: InterstitialDisplayProperties {
         fulfillOrFail(interstitialDisplayPropertiesExpectation, "interstitialDisplayPropertiesExpectation")
         return InterstitialDisplayProperties()
     }
@@ -335,7 +335,7 @@ class AdViewManagerTest: XCTestCase, PBMAdViewManagerDelegate {
         fulfillOrFail(adLoadedExpectation, "adLoadedExpectation")
     }
     
-    func failed(toLoad error:Error) {
+    func failedToLoad(_ error:Error) {
         fulfillOrFail(failedToLoadExpectation, "failedToLoadExpectation")
         currentlyDisplaying = false
     }

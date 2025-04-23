@@ -155,13 +155,13 @@ public class BannerView:
                 true
             })
         
-        autoRefreshManager = PBMAutoRefreshManager(
+        autoRefreshManager = Factory.PBMAutoRefreshManager(
             prefetchTime: PBMAdPrefetchTime,
-            locking: adLoadFlowController?.dispatchQueue,
+            lockingQueue: adLoadFlowController?.dispatchQueue,
             lockProvider: { [weak self] in
                 self?.adLoadFlowController?.mutationLock
             },
-            refreshDelay: { [weak self] in
+            refreshDelayBlock: { [weak self] in
                 if let interval = self?.adUnitConfig.refreshInterval {
                     return NSNumber(value: interval)
                 }

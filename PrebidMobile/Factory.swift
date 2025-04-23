@@ -171,5 +171,25 @@ class Factory: NSObject {
     @objc public static func PBMBannerAdLoader(delegate: BannerAdLoaderDelegate) -> PBMBannerAdLoader {
         PBMBannerAdLoaderType.init(delegate: delegate)
     }
+    
+    // MARK: PBMAutoRefreshManager
+    
+    @objc public static let PBMAutoRefreshManagerType: PBMAutoRefreshManager.Type = {
+        NSClassFromString("PBMAutoRefreshManager_Objc") as! PBMAutoRefreshManager.Type
+    }()
+    
+    @objc public static func PBMAutoRefreshManager(prefetchTime: TimeInterval,
+                                                   lockingQueue: DispatchQueue? = nil,
+                                                   lockProvider: (() -> NSLocking?)? = nil,
+                                                   refreshDelayBlock: @escaping () -> NSNumber?,
+                                                   mayRefreshNowBlock: @escaping () -> Bool,
+                                                   refreshBlock: @escaping PBMVoidBlock) -> PBMAutoRefreshManager {
+        PBMAutoRefreshManagerType.init(prefetchTime: prefetchTime,
+                                       lockingQueue: lockingQueue,
+                                       lockProvider: lockProvider,
+                                       refreshDelayBlock: refreshDelayBlock,
+                                       mayRefreshNowBlock: mayRefreshNowBlock,
+                                       refreshBlock: refreshBlock)
+    }
 }
 

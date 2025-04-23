@@ -13,8 +13,6 @@
  limitations under the License.
  */
 
-#import "PBMAutoRefreshManager.h"
-
 #import "PBMAdRefreshOptions.h"
 #import "PBMFunctions+Private.h"
 
@@ -29,7 +27,7 @@
 #endif
 
 
-@interface PBMAutoRefreshManager ()
+@interface PBMAutoRefreshManager_Objc : NSObject <PBMAutoRefreshManager>
 
 /// Queue on which PBMAutoRefreshManager should acquire the lock protecting external state during refresh attempts.
 @property (nonatomic, strong, nullable, readonly) dispatch_queue_t lockingQueue;
@@ -53,7 +51,7 @@
 
 
 
-@implementation PBMAutoRefreshManager
+@implementation PBMAutoRefreshManager_Objc
 
 // MARK: - Lifecycle
 
