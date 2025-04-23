@@ -15,7 +15,7 @@
 import Foundation
 import XCTest
 
-@testable import PrebidMobile
+@testable @_spi(PBMInternal) import PrebidMobile
 
 class PBMAdLoadFlowControllerTest_CompositeMock {
     enum ExpectedCall {
@@ -31,7 +31,7 @@ class PBMAdLoadFlowControllerTest_CompositeMock {
     }
     
     let mockFlowControllerDelegate: AdLoadFlowControllerDelegate
-    let mockAdLoader: PBMAdLoaderProtocol
+    let mockAdLoader: AdLoaderProtocol
     let mockPrimaryAdRequester: PrimaryAdRequesterProtocol
     let mockRequesterFactory: (AdUnitConfig)->BidRequesterProtocol
     let mockConfigValidator: PBMAdUnitConfigValidationBlock

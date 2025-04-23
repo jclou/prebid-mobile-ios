@@ -16,15 +16,19 @@
 #import "PBMAdLoadFlowController.h"
 
 #import "PBMAdLoadFlowState.h"
-#import "PBMAdLoaderFlowDelegate.h"
 
+@class AdUnitConfig;
 @class BidResponse;
 @protocol AdLoadFlowControllerDelegate;
+@protocol PBMAdLoaderFlowDelegate;
+@protocol PBMAdLoaderProtocol;
 @protocol PBMBidRequesterProtocol;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PBMAdLoadFlowController () <PBMAdLoaderFlowDelegate>
+typedef BOOL(^PBMAdUnitConfigValidationBlock)(AdUnitConfig *adUnitConfig, BOOL renderWithPrebid);
+
+@interface PBMAdLoadFlowController_Objc ()
 
 @property (nonatomic, copy, nonnull, readonly) id<PBMBidRequesterProtocol> (^bidRequesterFactory)(AdUnitConfig *);
 @property (nonatomic, strong, nonnull, readonly) id<PBMAdLoaderProtocol> adLoader;

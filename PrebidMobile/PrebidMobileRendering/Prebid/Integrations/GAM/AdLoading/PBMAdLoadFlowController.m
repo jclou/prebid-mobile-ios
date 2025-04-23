@@ -31,7 +31,10 @@
 
 // MARK: - Implementation
 
-@implementation PBMAdLoadFlowController
+@implementation PBMAdLoadFlowController_Objc
+@synthesize bidResponse = _bidResponse;
+@synthesize dispatchQueue = _dispatchQueue;
+@synthesize mutationLock = _mutationLock;
 
 // MARK: - Lifecycle
 

@@ -141,5 +141,25 @@ class Factory: NSObject {
                                                      eventHandler: PrimaryAdRequesterProtocol) -> PBMInterstitialAdLoader {
         PBMInterstitialAdLoaderType.init(delegate: delegate, eventHandler: eventHandler)
     }
+    
+    // MARK: AdLoadFlowController
+    
+    @objc public static let AdLoadFlowControllerType: AdLoadFlowController.Type = {
+        NSClassFromString("PBMAdLoadFlowController_Objc") as! AdLoadFlowController.Type
+    }()
+    
+    @objc public static func AdLoadFlowController(
+        bidRequesterFactory: @escaping (_ adUnitConfig: AdUnitConfig) -> BidRequesterProtocol,
+        adLoader: AdLoaderProtocol,
+        adUnitConfig: AdUnitConfig,
+        delegate: AdLoadFlowControllerDelegate,
+        configValidationBlock: @escaping AdUnitConfigValidationBlock
+    ) -> AdLoadFlowController {
+        AdLoadFlowControllerType.init(bidRequesterFactory: bidRequesterFactory,
+                                      adLoader: adLoader,
+                                      adUnitConfig: adUnitConfig,
+                                      delegate: delegate,
+                                      configValidationBlock: configValidationBlock)
+    }
 }
 

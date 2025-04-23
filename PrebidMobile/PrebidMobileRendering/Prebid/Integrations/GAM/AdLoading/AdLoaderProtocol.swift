@@ -16,10 +16,17 @@
 
 import Foundation
 
-@objc @_spi(PBMInternal) public
-protocol PBMInterstitialAdLoader: AdLoaderProtocol, InterstitialControllerLoadingDelegate, InterstitialEventLoadingDelegate {
+@objc(PBMAdLoaderProtocol) @_spi(PBMInternal) public
+protocol AdLoaderProtocol {
     
-    init(delegate: InterstitialAdLoaderDelegate,
-         eventHandler: PrimaryAdRequesterProtocol)
+    weak var flowDelegate: AdLoaderFlowDelegate? { get set }
     
+    var primaryAdRequester: PrimaryAdRequesterProtocol { get }
+    
+    func createPrebidAd(bid: Bid,
+                        adUnitConfig: AdUnitConfig,
+                        adObjectSaver: @escaping (_ adObject: AnyObject) -> Void,
+                        loadMethodInvoker: @escaping (@escaping PBMVoidBlock) -> Void)
+    
+    func reportSuccess(adObject: AnyObject, adSize: NSValue?)
 }

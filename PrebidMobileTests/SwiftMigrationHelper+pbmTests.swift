@@ -21,3 +21,7 @@ func XCTAssertEqual<T: PBMSwiftMigrationHelper>(_ expression1: @autoclosure () -
                                                 _ expression2: @autoclosure () -> T) {
     XCTAssertEqual(expression1() as! NSObject, expression2() as! NSObject)
 }
+
+func Impl(_ x: AdLoadFlowController) -> PBMAdLoadFlowController_Objc {
+    x as! PBMAdLoadFlowController_Objc
+}
