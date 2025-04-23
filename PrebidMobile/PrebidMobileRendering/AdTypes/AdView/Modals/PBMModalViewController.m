@@ -21,6 +21,7 @@
 #import "UIView+PBMExtensions.h"
 #import "PBMWebView.h"
 #import "PBMCloseActionManager.h"
+#import "Log+Extensions.h"
 
 #import "PrebidMobileSwiftHeaders.h"
 #if __has_include("PrebidMobile-Swift.h")
