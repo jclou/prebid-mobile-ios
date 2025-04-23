@@ -14,9 +14,9 @@
  */
 
 import XCTest
-@testable import PrebidMobile
+@testable @_spi(PBMInternal) import PrebidMobile
 
-class PBMLocationManagerTest: XCTestCase {
+class LocationManagerTest: XCTestCase {
 
     let location = CLLocation(coordinate: CLLocationCoordinate2D(latitude: 34.149335, longitude: -118.1328249), altitude: 10, horizontalAccuracy: 10, verticalAccuracy: 10, timestamp: Date())
     let expectationTimeout: TimeInterval = 1
@@ -27,9 +27,9 @@ class PBMLocationManagerTest: XCTestCase {
     }
 
     func testSharedCreation() {
-        let locationManagerShared = PBMLocationManager.shared
+        let locationManagerShared = LocationManager.shared
         XCTAssertNotNil(locationManagerShared)
-        XCTAssert(locationManagerShared === PBMLocationManager.shared)
+        XCTAssertIdentical(locationManagerShared, LocationManager.shared)
     }
     
     func testInitializationFromBackground() {
@@ -42,7 +42,7 @@ class PBMLocationManagerTest: XCTestCase {
             expectationCheckThread.fulfill()
         }
         
-        let _ = PBMLocationManager(thread:thread)
+        let _ = LocationManager(currentThread: thread)
         
         waitForExpectations(timeout: 4)
     }
@@ -56,7 +56,7 @@ class PBMLocationManagerTest: XCTestCase {
             startUpdatingExpectation.fulfill()
         }
 
-        let locationManager = PBMLocationManager(locationManager: mockCLLocationManager)
+        let locationManager = LocationManager(locationManager: mockCLLocationManager)
         locationManager.locationUpdatesEnabled = true
 
         self.waitForExpectations(timeout: expectationTimeout, handler: nil)
@@ -70,7 +70,7 @@ class PBMLocationManagerTest: XCTestCase {
             startUpdatingExpectation.fulfill()
         }
 
-        let locationManager = PBMLocationManager(locationManager: mockCLLocationManager)
+        let locationManager = LocationManager(locationManager: mockCLLocationManager)
         locationManager.locationUpdatesEnabled = true
 
         self.waitForExpectations(timeout: expectationTimeout, handler: nil)
@@ -82,20 +82,20 @@ class PBMLocationManagerTest: XCTestCase {
 
         let mockCLLocationManager = MockCLLocationManagerRendering(enableLocationServices: true)
         mockCLLocationManager.startUpdatingLocationHandler = { () -> Void in
-            let status = MockCLLocationManagerRendering.authorizationStatusString()
+            let status = mockCLLocationManager.authorizationStatusString()
             XCTFail("Should not have called `startUpdatingLocation` with status of '\(status)'")
             startUpdatingExpectation.fulfill()
         }
 
-        let locationManager = PBMLocationManager(locationManager: mockCLLocationManager)
+        let locationManager = LocationManager(locationManager: mockCLLocationManager)
 
-        MockCLLocationManagerRendering.mock_authorizationStatus = .notDetermined
+        mockCLLocationManager.mock_authorizationStatus = .notDetermined
         locationManager.locationUpdatesEnabled = true
 
-        MockCLLocationManagerRendering.mock_authorizationStatus = .restricted
+        mockCLLocationManager.mock_authorizationStatus = .restricted
         locationManager.locationUpdatesEnabled = true
 
-        MockCLLocationManagerRendering.mock_authorizationStatus = .denied
+        mockCLLocationManager.mock_authorizationStatus = .denied
         locationManager.locationUpdatesEnabled = true
 
         self.waitForExpectations(timeout: expectationTimeout, handler: nil)
@@ -109,18 +109,18 @@ class PBMLocationManagerTest: XCTestCase {
         
         let mockCLLocationManager = MockCLLocationManagerRendering(enableLocationServices: true)
         mockCLLocationManager.startUpdatingLocationHandler = { () -> Void in
-            actualStatuses.append(MockCLLocationManagerRendering.authorizationStatus())
+            actualStatuses.append(mockCLLocationManager._authorizationStatus)
             if actualStatuses.count >= expectedStatuses.count {
                 startUpdatingExpectation.fulfill()
             }
         }
         
-        MockCLLocationManagerRendering.mock_authorizationStatus = .authorizedAlways
-        let locationManagerAuthorizedAlways = PBMLocationManager(locationManager: mockCLLocationManager)
+        mockCLLocationManager.mock_authorizationStatus = .authorizedAlways
+        let locationManagerAuthorizedAlways = LocationManager(locationManager: mockCLLocationManager)
         locationManagerAuthorizedAlways.locationUpdatesEnabled = true
 
-        MockCLLocationManagerRendering.mock_authorizationStatus = .authorizedWhenInUse
-        let locationManagerAuthorizedWhenInUse = PBMLocationManager(locationManager: mockCLLocationManager)
+        mockCLLocationManager.mock_authorizationStatus = .authorizedWhenInUse
+        let locationManagerAuthorizedWhenInUse = LocationManager(locationManager: mockCLLocationManager)
         locationManagerAuthorizedWhenInUse.locationUpdatesEnabled = true
         
         self.waitForExpectations(timeout: expectationTimeout, handler: nil)
@@ -141,7 +141,7 @@ class PBMLocationManagerTest: XCTestCase {
             }
         }
 
-        let locationManager = PBMLocationManager(locationManager: mockCLLocationManager)
+        let locationManager = LocationManager(locationManager: mockCLLocationManager)
         locationManager.locationUpdatesEnabled = true
         locationManager.locationUpdatesEnabled = true
 
@@ -164,7 +164,7 @@ class PBMLocationManagerTest: XCTestCase {
             }
         }
 
-        let locationManager = PBMLocationManager(locationManager: mockCLLocationManager)
+        let locationManager = LocationManager(locationManager: mockCLLocationManager)
         locationManager.locationUpdatesEnabled = true
         locationManager.locationUpdatesEnabled = true
 
@@ -181,7 +181,7 @@ class PBMLocationManagerTest: XCTestCase {
     func testCoordinatesAreInitiallyInvalid() {
         let mockCLLocationManager = MockCLLocationManagerRendering(enableLocationServices: true, authorizationStatus: .authorizedAlways)
 
-        let locationManager = PBMLocationManager(locationManager: mockCLLocationManager)
+        let locationManager = LocationManager(locationManager: mockCLLocationManager)
         locationManager.locationUpdatesEnabled = true
 
         XCTAssertFalse(locationManager.coordinatesAreValid)
@@ -192,7 +192,7 @@ class PBMLocationManagerTest: XCTestCase {
     func testCoordinatesAreValid() {
         let mockCLLocationManager = MockCLLocationManagerRendering(enableLocationServices: true, authorizationStatus: .authorizedAlways)
 
-        let locationManager = PBMLocationManager(locationManager: mockCLLocationManager)
+        let locationManager = LocationManager(locationManager: mockCLLocationManager)
         locationManager.locationUpdatesEnabled = true
         mockCLLocationManager.delegate?.locationManager?(CLLocationManager(), didUpdateLocations: [self.location])
 
@@ -211,7 +211,7 @@ class PBMLocationManagerTest: XCTestCase {
             stopUpdatingExpection.fulfill()
         }
 
-        let locationManager = PBMLocationManager(locationManager: mockCLLocationManager)
+        let locationManager = LocationManager(locationManager: mockCLLocationManager)
         locationManager.locationUpdatesEnabled = true
 
         enum ErrorError: Error { case Error }
@@ -225,7 +225,7 @@ class PBMLocationManagerTest: XCTestCase {
 
     func testInternalLocationManagerFailureRetainsPreviousLocationData() {
         let mockCLLocationManager = MockCLLocationManagerRendering(enableLocationServices: true, authorizationStatus: .authorizedAlways)
-        let locationManager = PBMLocationManager(locationManager: mockCLLocationManager)
+        let locationManager = LocationManager(locationManager: mockCLLocationManager)
         locationManager.locationUpdatesEnabled = true
 
         mockCLLocationManager.delegate?.locationManager?(CLLocationManager(), didUpdateLocations: [self.location])
@@ -244,11 +244,9 @@ class PBMLocationManagerTest: XCTestCase {
     
     func testValidLocation() {
         let invalidLocation = CLLocation(latitude: 0, longitude: 0)
-        let locationManagerSingleton = PBMLocationManager.shared
+        let locationManagerSingleton = LocationManager.shared
         XCTAssertTrue(locationManagerSingleton.locationIsValid(location))
         XCTAssertFalse(locationManagerSingleton.locationIsValid(invalidLocation))
-        XCTAssertFalse(locationManagerSingleton.locationIsValid(nil))
-        XCTAssertFalse(locationManagerSingleton.locationIsValid(NSObject() as? CLLocation))
     }
 }
 
@@ -262,15 +260,15 @@ class MockReachability: Reachability {
     }
 }
 
-class MockCLLocationManagerRendering: NSObject, PBMLocationManagerProtocol {
-    
+class MockCLLocationManagerRendering: NSObject, LocationManagerProtocol {
     weak var delegate: CLLocationManagerDelegate?
     var distanceFilter: CLLocationDistance = 0
     var desiredAccuracy: CLLocationAccuracy = 0
     var location: CLLocation?
+    var _authorizationStatus: CLAuthorizationStatus { mock_authorizationStatus }
     
     static var mock_locationServicesEnabled = false
-    static var mock_authorizationStatus = CLAuthorizationStatus.denied
+    var mock_authorizationStatus = CLAuthorizationStatus.denied
 
     var startUpdatingLocationHandler: (() -> Void)?
     var stopUpdatingLocationHandler: (() -> Void)?
@@ -280,24 +278,19 @@ class MockCLLocationManagerRendering: NSObject, PBMLocationManagerProtocol {
     convenience init(enableLocationServices: Bool = false, authorizationStatus: CLAuthorizationStatus = .denied) {
         self.init()
         MockCLLocationManagerRendering.mock_locationServicesEnabled = enableLocationServices
-        MockCLLocationManagerRendering.mock_authorizationStatus = authorizationStatus
+        mock_authorizationStatus = authorizationStatus
     }
 
     class func reset() {
         MockCLLocationManagerRendering.mock_locationServicesEnabled = false
-        MockCLLocationManagerRendering.mock_authorizationStatus = .denied
     }
 
     @objc class func locationServicesEnabled() -> Bool {
         return self.mock_locationServicesEnabled
     }
 
-    @objc class func authorizationStatus() -> CLAuthorizationStatus {
-        return self.mock_authorizationStatus
-    }
-
-    class func authorizationStatusString() -> String {
-        switch self.mock_authorizationStatus {
+    func authorizationStatusString() -> String {
+        switch mock_authorizationStatus {
         case .notDetermined:
             return "NotDetermined"
         case .restricted:

@@ -14,7 +14,7 @@
 //
 
 import XCTest
-@testable import PrebidMobile
+@testable @_spi(PBMInternal) import PrebidMobile
 
 final class SharedIdTests: XCTestCase {
     
@@ -102,7 +102,7 @@ final class SharedIdTests: XCTestCase {
         if #available(iOS 14, *) {
             MockDeviceAccessManager.mockAppTrackingTransparencyStatus = .authorized
         }
-        let mockLocationManagerSuccessful = MockLocationManagerSuccessful.shared
+        let mockLocationManagerSuccessful = MockLocationManager()
         let mockCTTelephonyNetworkInfo = MockCTTelephonyNetworkInfo()
         let mockReachability = MockReachability.shared
         

@@ -27,6 +27,4 @@
 #import "PBMORTBRewardedConfiguration.h"
 #import "PBMORTBRewardedReward.h"
 
-#import "PBMLocationManager.h"
-
 #import "PBMCreativeViewabilityTracker.h"

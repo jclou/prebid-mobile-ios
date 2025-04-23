@@ -218,18 +218,6 @@ PBMParameterKeys const PBMParameterKeysOPEN_RTB = @"openrtb";
 
 @end
 
-
-#pragma mark - PBMGeoLocationConstants
-
-@implementation PBMGeoLocationConstants
-
-+(double)DISTANCE_FILTER {
-    return 50.0;
-}
-
-@end
-
-
 #pragma mark - PBMConstants
 
 @implementation PBMConstants

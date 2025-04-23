@@ -18,7 +18,7 @@ import AppTrackingTransparency
 import XCTest
 import CoreLocation
 
-@testable import PrebidMobile
+@testable @_spi(PBMInternal) import PrebidMobile
 
 class ParameterBuilderServiceTest : XCTestCase {
     
@@ -55,7 +55,7 @@ class ParameterBuilderServiceTest : XCTestCase {
         if #available(iOS 14, *) {
             MockDeviceAccessManager.mockAppTrackingTransparencyStatus = .authorized
         }
-        let mockLocationManagerSuccessful = MockLocationManagerSuccessful.shared
+        let mockLocationManagerSuccessful = MockLocationManager()
         let mockCTTelephonyNetworkInfo = MockCTTelephonyNetworkInfo()
         let mockReachability = MockReachability.shared
         

@@ -20,7 +20,6 @@
 
 #import "PBMAbstractCreative.h"
 #import "PBMFunctions+Private.h"
-#import "PBMLocationManager.h"
 #import "PBMMRAIDController.h"
 #import "PBMMRAIDJavascriptCommands.h"
 #import "PBMMacros.h"
@@ -746,8 +745,8 @@ static PBMError *extracted(NSString *errorMessage) {
 }
 
 - (void)MRAID_updateLocation {
-    if (Prebid.shared.locationUpdatesEnabled && PBMLocationManager.shared.coordinatesAreValid) {
-        PBMLocationManager *locationManager = PBMLocationManager.shared;
+    __auto_type locationManager = PBMLocationManager.shared;
+    if (Prebid.shared.locationUpdatesEnabled && locationManager.coordinatesAreValid) {
         [self evaluateJavaScript:[PBMMRAIDJavascriptCommands updateLocation:locationManager.coordinates
                                                                    accuracy:locationManager.horizontalAccuracy
                                                                     timeStamp:[locationManager.timestamp timeIntervalSince1970]]];

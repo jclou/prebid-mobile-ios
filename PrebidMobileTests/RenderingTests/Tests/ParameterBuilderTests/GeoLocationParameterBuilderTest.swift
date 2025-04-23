@@ -17,7 +17,7 @@ import UIKit
 import XCTest
 import CoreLocation
 
-@testable import PrebidMobile
+@testable @_spi(PBMInternal) import PrebidMobile
 
 class GeoLocationParameterBuilderTest : XCTestCase {
     
@@ -26,7 +26,7 @@ class GeoLocationParameterBuilderTest : XCTestCase {
     }
     
     func testBasic() {
-        let mockLocationManagerSuccessful: MockLocationManagerSuccessful = MockLocationManagerSuccessful.shared
+        let mockLocationManagerSuccessful = MockLocationManager()
         let builder = GeoLocationParameterBuilder(locationManager:mockLocationManagerSuccessful)
         let bidRequest = PBMORTBBidRequest()
         
@@ -40,7 +40,7 @@ class GeoLocationParameterBuilderTest : XCTestCase {
     //Show that user values do not interact with GPS values.
     func testUserAndDevice() {
         
-        let mockLocationManagerSuccessful = MockLocationManagerSuccessful.shared
+        let mockLocationManagerSuccessful = MockLocationManager()
         let builder = GeoLocationParameterBuilder(locationManager:mockLocationManagerSuccessful)
         
         

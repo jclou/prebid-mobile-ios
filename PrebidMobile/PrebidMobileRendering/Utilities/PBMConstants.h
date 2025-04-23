@@ -147,15 +147,6 @@ NS_SWIFT_NAME(ParseKey)
 @end
 
 
-//MARK: PBMGeoLocationConstants
-NS_SWIFT_NAME(GeoLocationConstants)
-@interface PBMGeoLocationConstants : NSObject
-
-@property (class, readonly) double DISTANCE_FILTER                      NS_SWIFT_NAME(DISTANCE_FILTER);
-
-@end
-
-
 //MARK: PBMConstants
 @interface PBMConstants : NSObject
 

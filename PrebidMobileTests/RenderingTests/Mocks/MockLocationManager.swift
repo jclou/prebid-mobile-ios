@@ -15,32 +15,43 @@
 
 import CoreLocation
 
-@testable import PrebidMobile
+@testable @_spi(PBMInternal) import PrebidMobile
 
-class MockLocationManagerSuccessful: PBMLocationManager {
-
-    static let testCoord = CLLocationCoordinate2D(latitude: 34.149335, longitude: -118.1328249)
-    static let testCoordsAreValid = true
-    static let testCity = "Pasadena"
-    static let testCountry = "USA"
-    static let testState = "CA"
-    static let testZipCode = "91601"
-
-    override class var shared: MockLocationManagerSuccessful {
-        return MockLocationManagerSuccessful(thread: Thread.current)
+class MockLocationManager: LocationManager {
+    let mock_locationManager: MockCLLocationManager
+    
+    init() {
+        let location = MockCLLocation(latitude: 34.149335, longitude: -118.1328249)
+        location.mock_horizontalAccuracy = 10
+        location.mock_verticalAccuracy = 10
+        
+        mock_locationManager = MockCLLocationManager(location: location)
+        super.init(locationManager: mock_locationManager)
     }
-
-    override var coordinatesAreValid:Bool {
-        get {
-            return MockLocationManagerSuccessful.testCoordsAreValid
+    
+    class MockCLLocationManager: NSObject, LocationManagerProtocol {
+        var delegate: (any CLLocationManagerDelegate)?
+        var location: CLLocation?
+        var distanceFilter: CLLocationDistance = .zero
+        var desiredAccuracy: CLLocationAccuracy = .zero
+        var _authorizationStatus: CLAuthorizationStatus = .notDetermined
+        func startUpdatingLocation() {}
+        func stopUpdatingLocation() {}
+        
+        init(location: CLLocation?) {
+            self.location = location
         }
     }
-
-    override var coordinates:CLLocationCoordinate2D {
-        get {
-            return MockLocationManagerSuccessful.testCoord
+    
+    class MockCLLocation: CLLocation, @unchecked Sendable {
+        var mock_horizontalAccuracy: CLLocationAccuracy?
+        override var horizontalAccuracy: CLLocationAccuracy {
+            mock_horizontalAccuracy ?? super.horizontalAccuracy
+        }
+        
+        var mock_verticalAccuracy: CLLocationAccuracy?
+        override var verticalAccuracy: CLLocationAccuracy {
+            mock_verticalAccuracy ?? super.verticalAccuracy
         }
     }
 }
-
-class MockLocationManagerUnSuccessful : PBMLocationManager {}

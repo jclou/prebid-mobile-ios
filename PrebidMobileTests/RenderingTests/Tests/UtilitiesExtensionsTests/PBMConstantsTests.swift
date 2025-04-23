@@ -14,7 +14,7 @@
   */
 
 import XCTest
-@testable import PrebidMobile
+@testable @_spi(PBMInternal) import PrebidMobile
 
 class PBMConstantsTests: XCTestCase {
     
@@ -59,7 +59,7 @@ class PBMConstantsTests: XCTestCase {
     }
     
     func testPBMGeoLocationConstants() {
-        XCTAssertEqual(GeoLocationConstants.DISTANCE_FILTER, 50.0)
+        XCTAssertEqual(LocationManager.distanceFilter, 50.0)
     }
     
     func testButtonAreaConstant() {
