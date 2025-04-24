@@ -1,7 +1,4 @@
 
-// Bid
-#import "PBMORTBAdConfiguration.h"
-
 #import "PBMORTBRewardedClose.h"
 #import "PBMORTBRewardedCompletion.h"
 #import "PBMORTBRewardedCompletionBanner.h"
