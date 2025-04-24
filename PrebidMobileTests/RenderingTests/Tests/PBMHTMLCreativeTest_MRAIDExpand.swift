@@ -22,7 +22,7 @@ class PBMHTMLCreativeTest_MRAIDExpand: PBMHTMLCreativeTest_Base {
     override func setUp() {
         super.setUp()
         htmlCreative.setupView()
-        mockWebView.mraidState = .default
+        mockWebView.mraidState = .defaultState
     }
     
     override func tearDown() {
