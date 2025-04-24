@@ -57,7 +57,7 @@ class BannerViewImpressionTracker: PrebidImpressionTrackerProtocol {
     private func attachViewabilityTracker() {
         guard let monitoredView else { return }
         
-        viewabilityTracker = PBMCreativeViewabilityTracker(
+        viewabilityTracker = Factory.PBMCreativeViewabilityTracker(
             view: monitoredView,
             pollingTimeInterval: pollingInterval,
             onExposureChange: { [weak self, weak monitoredView] _, viewExposure in

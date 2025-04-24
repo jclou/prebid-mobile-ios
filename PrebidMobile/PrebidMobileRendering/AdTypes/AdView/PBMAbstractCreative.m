@@ -19,7 +19,6 @@
 #import "PBMAbstractCreative+Protected.h"
 #import "PBMAbstractCreative.h"
 #import "PBMSafariVCOpener.h"
-#import "PBMCreativeViewabilityTracker.h"
 #import "PBMDeepLinkPlusHelper.h"
 #import "PBMFunctions+Private.h"
 #import "PBMFunctions.h"
@@ -176,7 +175,7 @@
     }
     
     if (!self.adWasShown) {
-        self.viewabilityTracker = [[PBMCreativeViewabilityTracker alloc] initWithCreative:self];
+        self.viewabilityTracker = [PBMFactory PBMCreativeViewabilityTrackerWithCreative:self];
     }
     
     PBMORTBBidExtSkadn * skadnInfo = self.transaction.bid.skadn;

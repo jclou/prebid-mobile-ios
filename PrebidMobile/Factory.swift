@@ -191,5 +191,27 @@ class Factory: NSObject {
                                        mayRefreshNowBlock: mayRefreshNowBlock,
                                        refreshBlock: refreshBlock)
     }
+    
+    // MARK: PBMCreativeViewabilityTracker
+    
+    @objc public static let PBMCreativeViewabilityTrackerType: PBMCreativeViewabilityTracker.Type = {
+        NSClassFromString("PBMCreativeViewabilityTracker_Objc") as! PBMCreativeViewabilityTracker.Type
+    }()
+    
+    @objc public static func PBMCreativeViewabilityTracker(
+        view: UIView,
+        pollingTimeInterval: TimeInterval,
+        onExposureChange: @escaping PBMViewExposureChangeHandler
+    ) -> PBMCreativeViewabilityTracker {
+        PBMCreativeViewabilityTrackerType.init(view: view,
+                                               pollingTimeInterval: pollingTimeInterval,
+                                               onExposureChange: onExposureChange)
+    }
+    
+    @objc public static func PBMCreativeViewabilityTracker(
+        creative: PBMAbstractCreative
+    ) -> PBMCreativeViewabilityTracker {
+        PBMCreativeViewabilityTrackerType.init(creative: creative)
+    }
 }
 

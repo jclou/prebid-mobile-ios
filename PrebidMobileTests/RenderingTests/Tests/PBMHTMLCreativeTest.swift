@@ -405,7 +405,7 @@ class PBMHTMLCreativeTest : XCTestCase, PBMCreativeResolutionDelegate, CreativeV
         
         self.expectationCreativeDidDisplay = self.expectation(description: "Expected creativeDidDisplay to be called")
         
-        let viewabilityTracker = PBMCreativeViewabilityTracker(creative: self.htmlCreative)
+        let viewabilityTracker = Factory.PBMCreativeViewabilityTracker(creative: self.htmlCreative)
         viewabilityTracker.checkViewability()
         
         self.waitForExpectations(timeout: 1, handler: nil)
