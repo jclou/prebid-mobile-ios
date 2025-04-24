@@ -1,7 +1,5 @@
 
 // Bid
-#import "PBMORTBBidExtPrebid.h"
-#import "PBMORTBExtPrebidEvents.h"
 #import "PBMORTBAdConfiguration.h"
 
 #import "PBMORTBRewardedClose.h"
