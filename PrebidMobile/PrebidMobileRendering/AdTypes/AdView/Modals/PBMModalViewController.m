@@ -261,7 +261,7 @@
     }
 }
 
-- (void)creativeDisplayCompleted:(PBMAbstractCreative *)creative {
+- (void)creativeDisplayCompleted:(id<PBMAbstractCreative>)creative {
     if (self.modalState.adConfiguration.isRewarded) {
         PBMRewardedConfig * rewardedConfig = creative.creativeModel.adConfiguration.rewardedConfig;
         

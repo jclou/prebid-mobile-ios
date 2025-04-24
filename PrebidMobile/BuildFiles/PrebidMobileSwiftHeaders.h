@@ -1,6 +1,4 @@
 
-#import "PBMAbstractCreative.h"
-
 #import "PBMJsonCodable.h"
 
 // Bid

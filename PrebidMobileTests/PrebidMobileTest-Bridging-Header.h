@@ -33,7 +33,6 @@
 #import "PBMCreativeFactory.h"
 #import "PBMCreativeFactoryJob.h"
 #import "PBMCreativeModelCollectionMakerVAST.h"
-#import "PBMCreativeResolutionDelegate.h"
 #import "PBMDeepLinkPlus.h"
 #import "PBMDeepLinkPlusHelper.h"
 #import "PBMDeepLinkPlusHelper+Testing.h"

@@ -183,7 +183,7 @@ class Factory: NSObject {
                                                    lockProvider: (() -> NSLocking?)? = nil,
                                                    refreshDelayBlock: @escaping () -> NSNumber?,
                                                    mayRefreshNowBlock: @escaping () -> Bool,
-                                                   refreshBlock: @escaping PBMVoidBlock) -> PBMAutoRefreshManager {
+                                                   refreshBlock: @escaping VoidBlock) -> PBMAutoRefreshManager {
         PBMAutoRefreshManagerType.init(prefetchTime: prefetchTime,
                                        lockingQueue: lockingQueue,
                                        lockProvider: lockProvider,

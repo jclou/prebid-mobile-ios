@@ -36,7 +36,6 @@
 #import "PBMMRAIDConstants.h"
 #import "PBMVideoView.h"
 #import "PBMWebView.h"
-#import "PBMWebViewDelegate.h"
 #import "PBMMRAIDController.h"
 #import "PBMCreativeViewabilityTracker.h"
 #import "Log+Extensions.h"
@@ -50,10 +49,7 @@
 
 #pragma mark - Private Extension
 
-@interface PBMAbstractCreative() <PBMWebViewDelegate>
-@end
-
-@interface PBMHTMLCreative()
+@interface PBMHTMLCreative() <PBMWebViewDelegate>
 
 @property (nonatomic, strong) NSURL *baseURL;
 @property (nonatomic, strong) PBMWebView *prebidWebView;

@@ -22,8 +22,6 @@
 #import "UIView+PBMExtensions.h"
 #import "NSURL+PBMExtensions.h"
 
-#import "PBMAbstractCreative.h"
-#import "PBMCreativeResolutionDelegate.h"
 #import "PBMDeviceAccessManager.h"
 #import "PBMFunctions+Private.h"
 #import "PBMMRAIDCommand.h"
@@ -49,7 +47,7 @@
 
 @interface PBMMRAIDController () <PBMExposureChangeDelegate>
 
-@property (nonatomic, weak) PBMAbstractCreative *creative;
+@property (nonatomic, weak)  id<PBMAbstractCreative> creative;
 @property (nonatomic, weak, nullable) UIViewController* viewControllerForPresentingModals;
 @property (nonatomic, weak, nullable) id<PBMCreativeViewDelegate> creativeViewDelegate;
 @property (nonatomic, copy, nullable) PBMCreativeFactoryDownloadDataCompletionClosure downloadBlock;
@@ -78,7 +76,7 @@
     return [urlString hasPrefix:PBMMRAIDConstants.mraidURLScheme];
 }
 
-- (instancetype)initWithCreative:(PBMAbstractCreative*)creative
+- (instancetype)initWithCreative:(id<PBMAbstractCreative>)creative
      viewControllerForPresenting:(UIViewController*)viewControllerForPresentingModals
                          webView:(PBMWebView*)webView
             creativeViewDelegate:(id<PBMCreativeViewDelegate>)creativeViewDelegate
@@ -94,7 +92,7 @@
     return self;
 }
 
-- (instancetype)initWithCreative:(PBMAbstractCreative*)creative
+- (instancetype)initWithCreative:(id<PBMAbstractCreative>)creative
      viewControllerForPresenting:(UIViewController*)viewControllerForPresentingModals
                          webView:(PBMWebView*)webView
             creativeViewDelegate:(id<PBMCreativeViewDelegate>)creativeViewDelegate
@@ -499,7 +497,7 @@
 
 - (void)handleMRAIDCommandUnload {
     PBMLogWhereAmI();
-    PBMAbstractCreative * const creative = self.creative;
+    id<PBMAbstractCreative> const creative = self.creative;
     switch (self.prebidWebView.state) {
         case PBMWebViewStateLoaded: {
             if (self.creative.transaction.adConfiguration.presentAsInterstitial) {

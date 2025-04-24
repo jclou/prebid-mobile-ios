@@ -46,6 +46,6 @@ protocol AdLoadFlowController: AdLoaderFlowDelegate {
     
     /// Allows to update external state on the same serial dispatch queue as AdLoadFlowController's state mutations.
     /// 'mutationLock' is automatically locked before invoking the provided block, and unlocked afterwards.
-    func enqueueGatedBlock(_ block: @escaping PBMVoidBlock)
+    func enqueueGatedBlock(_ block: @escaping VoidBlock)
     
 }

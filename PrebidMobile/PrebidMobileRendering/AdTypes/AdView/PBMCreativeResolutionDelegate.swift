@@ -16,17 +16,10 @@
 
 import Foundation
 
-@objc(PBMAdLoaderProtocol) @_spi(PBMInternal) public
-protocol AdLoaderProtocol {
+@objc @_spi(PBMInternal) public
+protocol PBMCreativeResolutionDelegate {
     
-    weak var flowDelegate: AdLoaderFlowDelegate? { get set }
+    func creativeReady(_ creative: PBMAbstractCreative)
+    func creativeFailed(_ error: Error)
     
-    var primaryAdRequester: PrimaryAdRequesterProtocol { get }
-    
-    func createPrebidAd(bid: Bid,
-                        adUnitConfig: AdUnitConfig,
-                        adObjectSaver: @escaping (_ adObject: AnyObject) -> Void,
-                        loadMethodInvoker: @escaping (@escaping VoidBlock) -> Void)
-    
-    func reportSuccess(adObject: AnyObject, adSize: NSValue?)
 }

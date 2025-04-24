@@ -24,7 +24,7 @@ protocol PBMAutoRefreshManager {
          lockProvider: (() -> NSLocking?)?,
          refreshDelayBlock: @escaping () -> NSNumber?,
          mayRefreshNowBlock: @escaping () -> Bool,
-         refreshBlock: @escaping PBMVoidBlock)
+         refreshBlock: @escaping VoidBlock)
     
     func setupRefreshTimer()
     func cancelRefreshTimer()
