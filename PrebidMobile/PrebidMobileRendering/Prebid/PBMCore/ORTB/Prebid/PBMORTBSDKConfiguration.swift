@@ -16,34 +16,33 @@
 
 import Foundation
 
-class PBMORTBBidExtPrebidCache: PBMJsonCodable {
-    var key: String?
-    var url: String?
-    var bids: PBMORTBBidExtPrebidCacheBids?
+@objc public class PBMORTBSDKConfiguration: NSObject, PBMJsonCodable {
+    @objc public var cftBanner: NSNumber?
+    @objc public var cftPreRender: NSNumber?
 
     private enum KeySet: String {
-        case url
-        case key
-        case bids
+        case cftbanner
+        case cftprerender
     }
-    
-    init() {
+
+    @objc public override init() {
+        super.init()
     }
-    
-    required init(jsonDictionary: [String : Any]) {
+
+    @objc public required init(jsonDictionary: [String : Any]) {
         let json = JSONObject<KeySet>(jsonDictionary)
 
-        url     = json[.url]
-        key     = json[.key]
-        bids    = json[.bids]
+        cftBanner = json[.cftbanner]
+        cftPreRender = json[.cftprerender]
+
+        super.init()
     }
     
-    var jsonDictionary: [String : Any] {
+    @objc public var jsonDictionary: [String : Any] {
         var json = JSONObject<KeySet>()
 
-        json[.key]  = key
-        json[.url]  = url
-        json[.bids] = bids
+        json[.cftbanner] = cftBanner
+        json[.cftprerender] = cftPreRender
 
         return json.dict
     }

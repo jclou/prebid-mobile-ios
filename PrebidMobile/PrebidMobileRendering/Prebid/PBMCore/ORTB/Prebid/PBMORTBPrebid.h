@@ -16,7 +16,3 @@
 // MARK: response
 #import "PBMORTBNoBidReason.h"
 
-// MARK: response.seatbid[?].bid[?].ext
-#import "PBMORTBBidExtSkadn.h"
-#import "PBMORTBBidExtSkadnSKOverlay.h"
-
