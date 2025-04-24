@@ -16,34 +16,39 @@
 
 import Foundation
 
-class PBMORTBBidExtPrebidCache: PBMJsonCodable {
-    var key: String?
-    var url: String?
-    var bids: PBMORTBBidExtPrebidCacheBids?
+@objc public class PBMORTBRewardedReward: NSObject, PBMJsonCodable {
+    /// Type of the reward
+    @objc public var type: String?
+
+    /// Amount of reward
+    @objc public var count: NSNumber?
+
+    /// For the future extensions
+    @objc public var ext: [String : Any]?
 
     private enum KeySet: String {
-        case url
-        case key
-        case bids
+        case type
+        case count
+        case ext
     }
-    
-    init() {
+
+    @objc public override init() {
     }
-    
-    required init?(jsonDictionary: [String : Any]) {
+
+    @objc public required init(jsonDictionary: [String : Any]) {
         let json = JSONObject<KeySet>(jsonDictionary)
 
-        url     = json[.url]
-        key     = json[.key]
-        bids    = json[.bids]
+        type    = json[.type]
+        count   = json[.count]
+        ext     = json[.ext]
     }
     
-    var jsonDictionary: [String : Any] {
+    @objc public var jsonDictionary: [String : Any] {
         var json = JSONObject<KeySet>()
 
-        json[.key]  = key
-        json[.url]  = url
-        json[.bids] = bids
+        json[.type]     = type
+        json[.count]    = count
+        json[.ext]      = ext
 
         return json.dict
     }

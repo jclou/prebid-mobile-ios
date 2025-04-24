@@ -16,34 +16,35 @@
 
 import Foundation
 
-class PBMORTBBidExtPrebidCache: PBMJsonCodable {
-    var key: String?
-    var url: String?
-    var bids: PBMORTBBidExtPrebidCacheBids?
+@objc public class PBMORTBRewardedCompletionVideoEndcard: NSObject, PBMJsonCodable {
+    /// The period of time that the ad is on the screen and the user earns a reward
+    @objc public var time: NSNumber?
+
+    /// The URL with a custom schema that will be sent by the creative and should be caught by the SDK
+    @objc public var event: String?
 
     private enum KeySet: String {
-        case url
-        case key
-        case bids
+        case time
+        case event
     }
-    
-    init() {
+
+    @objc public override init() {
     }
-    
-    required init?(jsonDictionary: [String : Any]) {
+
+    @objc public required init(jsonDictionary: [String : Any]) {
         let json = JSONObject<KeySet>(jsonDictionary)
 
-        url     = json[.url]
-        key     = json[.key]
-        bids    = json[.bids]
+        time = json[.time]
+        event = json[.event]
+
+        super.init()
     }
     
-    var jsonDictionary: [String : Any] {
+    @objc public var jsonDictionary: [String : Any] {
         var json = JSONObject<KeySet>()
 
-        json[.key]  = key
-        json[.url]  = url
-        json[.bids] = bids
+        json[.time] = time
+        json[.event] = event
 
         return json.dict
     }

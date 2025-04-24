@@ -16,34 +16,31 @@
 
 import Foundation
 
-class PBMORTBBidExtPrebidCache: PBMJsonCodable {
-    var key: String?
-    var url: String?
-    var bids: PBMORTBBidExtPrebidCacheBids?
+/// Describes the condition when the SDK should send a signal to the application that the user has earned the reward.
+@objc public class PBMORTBRewardedCompletion: NSObject, PBMJsonCodable {
+    @objc public var banner: PBMORTBRewardedCompletionBanner?
+    @objc public var video: PBMORTBRewardedCompletionVideo?
 
     private enum KeySet: String {
-        case url
-        case key
-        case bids
+        case banner
+        case video
     }
-    
-    init() {
+
+    @objc public override init() {
     }
-    
-    required init?(jsonDictionary: [String : Any]) {
+
+    @objc public required init(jsonDictionary: [String : Any]) {
         let json = JSONObject<KeySet>(jsonDictionary)
 
-        url     = json[.url]
-        key     = json[.key]
-        bids    = json[.bids]
+        banner = json[.banner]
+        video = json[.video]
     }
     
-    var jsonDictionary: [String : Any] {
+    @objc public var jsonDictionary: [String : Any] {
         var json = JSONObject<KeySet>()
 
-        json[.key]  = key
-        json[.url]  = url
-        json[.bids] = bids
+        json[.banner] = banner
+        json[.video] = video
 
         return json.dict
     }
